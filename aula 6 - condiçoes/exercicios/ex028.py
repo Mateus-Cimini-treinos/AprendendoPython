@@ -1,5 +1,7 @@
 #faça um algoritimo que gera um numero secreto e o usuario da um chute e o algoritimo gera uma mensagem dizendo que ele acertou ou erro
 
+print('┅' * 30)
+
 import random
 
 num = random.randint(1, 5)
@@ -10,3 +12,5 @@ if kick == num :
     print('Voce acertou!! Voce tem muita sorte')
 else :
     print('Voce errou!!')
+
+print('┅' * 30)

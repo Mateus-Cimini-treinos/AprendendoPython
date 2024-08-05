@@ -6,4 +6,4 @@ num = float(input('Digite um numero '))
 
 roundDown = math.floor(num)
 
-print('O inteiro do numero {} é: {}!'.format(num, roundDown))
+print('O inteiro do numero {} é: {} !'.format(num, roundDown))

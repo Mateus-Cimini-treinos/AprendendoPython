@@ -6,6 +6,15 @@
 
 frase = 'Mateus é lindo'  # String usada para demonstração
 
+print('''
+      fysduigfyreidufgherdiuogfhjredogfhuidohgiufdhgufidhguifh
+      dgiujhtfuighfuigjhfnugjihfngujiuhfnbdjighfdjihgfduijghnfiujd
+      hngbfiujdhnbgjifdhgbniujfdhnbgiujfdhnbgiughusdghusdfhgyufdhgu
+      ftsyedgfgytdusgfyuergfryeuihgrfihgdrfuiehguifohegrdhrugdhhgt
+      ''') #fazendo print mostrar o texto ja formatado
+
+
+
 print('-'*60 + '\nFATIAMENTO')
 # FATIAMENTO: Extraindo partes específicas da string
 

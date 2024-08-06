@@ -13,7 +13,7 @@ line3 = float(input('Qual o comprimento da terceira linha? '))
 
 if line1 + line2 > line3 and line2 + line3 > line1 and line1 + line3 > line2 :
     print('Da para fazeer um triangulo')
-    if line1 == line2 and line1 == line3 :
+    if line1 == line2 == line3 :
         print('E um triangulo Equilatero!!')
     elif line1 == line2 and line1 != line3 and line2 != line3 :
         print('E um triangulo isóceles')

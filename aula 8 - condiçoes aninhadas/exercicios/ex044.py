@@ -24,3 +24,6 @@ elif payment == 4 :
 elif payment == 3 :
     payment3 = price / 2
     print('O preço do produto e de {} e o valor da parcela e de {}'.format(price, payment3))
+else:
+    print('Opçao errada')
+    

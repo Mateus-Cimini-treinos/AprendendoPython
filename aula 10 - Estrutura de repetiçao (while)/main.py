@@ -47,3 +47,4 @@ while n != 0 :
 print('pares {} impares {}'.format(par, impar))  # Exibe a contagem de pares e ímpares
 print('Fim')
 '''
+bre

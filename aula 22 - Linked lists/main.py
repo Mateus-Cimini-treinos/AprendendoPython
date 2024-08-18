@@ -32,6 +32,48 @@ class Lista:
 
 
     def __getitem__(self, posiçao):
+
+        if isinstance(posiçao, slice):
+            passo = posiçao.step if posiçao.step is not None else 1
+
+            if passo == 0:
+                raise ValueError('Passo nao pode ser igual a zero.')
+
+            if passo > 0 :
+                inicio = posiçao.start if posiçao.start is not None else 0
+                fim = posiçao.stop if posiçao.stop is not None else len(self)
+
+            else:
+                inicio = posiçao.start if posiçao.start is not None else len(self) - 1
+                fim = posiçao.stop if posiçao.stop is not None else -1
+
+            if inicio < 0:
+                inicio = len(self) + inicio
+
+            if fim < 0 and posiçao.stop is not None:
+                fim = len(self) + fim
+            
+            fatia = Lista()
+            # se o passo for positivo, vamos usar o lazy evaluation com __iter__
+            if passo > 0:
+                i = 0
+                indices = range(inicio, fim, passo)
+                it = iter(self)
+                while i < fim:
+                    v = next(it)
+                    if i in indices:
+                        fatia.inserir_no_fim(v)
+                    i += 1
+            else: # se for negativo, vamos usar __getitem__
+                for i in range(inicio, fim, passo):
+                    fatia.inserir_no_fim(self[i])
+
+            return fatia
+                
+
+        if posiçao < 0:
+            posiçao = len(self) + posiçao
+
         if posiçao < 0 or posiçao >= self.__quantidade:
             raise IndexError('Posiçao invalida')
         
@@ -41,6 +83,11 @@ class Lista:
             atual = atual.proximo
 
         return atual.valor
+    
+
+    def inserir_no_fim(self, valor):
+        self.inserir(len(self), valor)
+
 
     def inserir(self, posiçao, valor):
         novo = self.No(valor)
@@ -83,3 +130,6 @@ lista.inserir(1, 20)
 lista.inserir(2, 15)
 lista.inserir(2, 7)
 print(lista)
+print(lista[-4])
+print(lista[1:4])
+print(lista[-1:-5:-1])

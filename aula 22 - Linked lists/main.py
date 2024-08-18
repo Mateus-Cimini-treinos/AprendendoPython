@@ -11,9 +11,16 @@ class Lista:
 
 
 
-    def __init__(self):
+    def __init__(self, interavel=None):
         self.__cabeça = None
+        self.__cauda = None
         self.__quantidade = 0
+
+        if interavel is not None and hasattr(interavel, '__iter__'):
+            for item in interavel:
+                self.inserir_no_fim(item)
+        elif interavel is not None:
+            raise TypeError(f'O objeto {type(interavel)} nao e interavel')
 
 
     def __len__(self):
@@ -31,8 +38,40 @@ class Lista:
             atual = atual.proximo
 
 
-    def __getitem__(self, posiçao):
+    def __delitem__(self, posiçao):
+        if posiçao < 0:
+            posiçao = len(self) + posiçao
+        
+        if posiçao < 0 or posiçao >= self.__quantidade:
+            raise IndexError('Posiçao invalida.')
+        
+        self.__quantidade -= 1
 
+        # removendo da cabeça
+        if posiçao == 0:
+            self.__cabeça = self.__cabeça.proximo
+            if self.__cabeça is None:
+                self.__cauda = None
+            return
+
+        i = 0
+        atual = self.__cabeça
+        # buscando elemento anterior a posiçao que a gente quer remover
+        while atual.proximo is not None and i <posiçao - 1:
+            atual = atual.proximo
+            i += 1
+        
+        # removendo a cauda
+        if atual.proximo == self.__cauda:
+            self.__cauda = atual
+
+
+        # estamos removendo o elemento desejado
+        atual.proximo = atual.proximo.proximo
+
+
+
+    def __getitem__(self, posiçao):
         if isinstance(posiçao, slice):
             passo = posiçao.step if posiçao.step is not None else 1
 
@@ -86,17 +125,22 @@ class Lista:
     
 
     def inserir_no_fim(self, valor):
-        self.inserir(len(self), valor)
+        novo = self.No(valor)
+        self.__quantidade += 1
 
+        # quando a lista é vazia
+        if self.__cabeça is None:
+            self.__cabeça = novo
+            self.__cauda = novo
+            return
+        
+        self.__cauda.proximo = novo
+        self.__cauda = novo
 
     def inserir(self, posiçao, valor):
         novo = self.No(valor)
         self.__quantidade += 1
 
-        # quando a lista estiver vazia
-        if self.__cabeça is None:
-            self.__cabeça = novo
-            return
         
         # inserir na cabeça (primeira posiçao)
         if posiçao <= 0:
@@ -111,6 +155,9 @@ class Lista:
             atual = atual.proximo
             i += 1
 
+        if atual.proximo is None: # inserir na cauda (ultima posiçao)
+            self.__cauda = novo
+
         novo.proximo = atual.proximo
         atual.proximo = novo 
 
@@ -122,14 +169,14 @@ class Lista:
 
 
 
-lista = Lista()
+lista = Lista(range(50))
 
 print(lista)
-lista.inserir(0, 5)
-lista.inserir(1, 20)
-lista.inserir(2, 15)
-lista.inserir(2, 7)
+del(lista[10])
 print(lista)
-print(lista[-4])
-print(lista[1:4])
-print(lista[-1:-5:-1])
+del(lista[0])
+print(lista)
+del(lista[1])
+print(lista)
+del(lista[-1])
+print(lista)

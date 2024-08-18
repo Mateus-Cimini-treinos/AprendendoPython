@@ -1,4 +1,7 @@
 # aula sobre Linked lists
+from typing import Any
+
+
 class Lista:
     class No:
         def __init__(self, valor, proximo=None):
@@ -36,6 +39,20 @@ class Lista:
         while atual is not None:
             yield atual.valor
             atual = atual.proximo
+
+
+    def __setitem__(self, posiçao, valor):
+        if posiçao < 0 :
+            posiçao = len(self) + posiçao
+
+        if posiçao < 0 or posiçao >= self.__quantidade:
+            raise IndexError('Posiçao invalida')
+        
+        atual = self.__cabeça
+        for i in range(posiçao):
+            atual = atual.proximo
+
+        atual.valor = valor
 
 
     def __delitem__(self, posiçao):
@@ -179,4 +196,6 @@ print(lista)
 del(lista[1])
 print(lista)
 del(lista[-1])
+print(lista)
+lista[-1] = 'Mateus'
 print(lista)

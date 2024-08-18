@@ -6,6 +6,11 @@ class Lista:
             self.proximo = proximo
 
 
+        def __str__(self):
+            return str(self.valor)
+
+
+
     def __init__(self):
         self.__cabeça = None
         self.__quantidade = 0
@@ -14,6 +19,17 @@ class Lista:
     def __len__(self):
         return self.__quantidade
     
+
+    def __str__(self):
+        return '['+', '.join([str(valor) for valor in self]) + ']'
+    
+
+    def __iter__(self): 
+        atual = self.__cabeça
+        while atual is not None:
+            yield atual.valor
+            atual = atual.proximo
+
 
     def __getitem__(self, posiçao):
         if posiçao < 0 or posiçao >= self.__quantidade:
@@ -61,18 +77,9 @@ class Lista:
 
 lista = Lista()
 
-print(len(lista))
+print(lista)
 lista.inserir(0, 5)
 lista.inserir(1, 20)
 lista.inserir(2, 15)
 lista.inserir(2, 7)
-print(len(lista))
-
-print(f'O elemento da posiçao 0 é {lista[0]}')
-print(f'O elemento da posiçao 1 é {lista[1]}')
-print(f'O elemento da posiçao 2 é {lista[2]}')
-print(f'O elemento da posiçao 3 é {lista[3]}')
-
-
-for e in lista:
-    print(e)
+print(lista)

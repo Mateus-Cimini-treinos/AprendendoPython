@@ -1,5 +1,5 @@
 # aula sobre Linked lists
-from typing import Any
+from typing import Any, SupportsIndex
 
 
 class Lista:
@@ -179,23 +179,20 @@ class Lista:
         atual.proximo = novo 
 
     
-   
+    def estender(self, Interavel):
+        if Interavel is None or not hasattr(Interavel, '__iter__'):
+            raise TypeError(f'O objeto {type(Interavel)} nao e iteravel')
+        for item in Interavel:
+            self.inserir_no_fim(item)
+        
+lista1 = Lista(range(10, 20))
+lista2 = Lista(range(55, 67))
+
+print(lista1)
+print(lista2)
+lista1.estender(lista2)
+print(lista1)
+print(lista2)
 
 
 
-
-
-
-lista = Lista(range(50))
-
-print(lista)
-del(lista[10])
-print(lista)
-del(lista[0])
-print(lista)
-del(lista[1])
-print(lista)
-del(lista[-1])
-print(lista)
-lista[-1] = 'Mateus'
-print(lista)

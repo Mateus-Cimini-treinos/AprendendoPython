@@ -184,15 +184,45 @@ class Lista:
             raise TypeError(f'O objeto {type(Interavel)} nao e iteravel')
         for item in Interavel:
             self.inserir_no_fim(item)
-        
-lista1 = Lista(range(10, 20))
-lista2 = Lista(range(55, 67))
 
-print(lista1)
-print(lista2)
-lista1.estender(lista2)
-print(lista1)
-print(lista2)
+    
+    def remover(self, valor):
+        posiçao = self.indice(valor)
+        del self[posiçao]
+
+
+    def indice(self, valor):
+        i = 0
+        atual = self.__cabeça
+        while atual is not None:
+            if atual.valor == valor:
+                return i
+            atual = atual.proximo
+            i += 1
+
+        raise ValueError(f'{valor} não esta na lista.')
+    
+
+    def pop(self, posiçao=None):
+        if posiçao is None:
+            posiçao = len(self) - 1 # remover e retornar o ultimo elemento da lista
+
+        valor = self[posiçao]
+        del self[posiçao]
+
+        return valor
+    
+
+    def limpar(self):
+        self.__cabeça = None
+        self.__cauda = None
+        self.__quantidade = 0
+
+lista = Lista(['Mateus', 'Felipe', 'Lucas', 'Joao', 'Maria', 'felicia', 'Maria'])
+
+print(lista)
+lista.limpar()
+print(lista)
 
 
 

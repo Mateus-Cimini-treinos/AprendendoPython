@@ -218,11 +218,39 @@ class Lista:
         self.__cauda = None
         self.__quantidade = 0
 
+
+    def contar(self, valor):
+        contador = 0
+
+        for elemento in self:
+            if elemento == valor:
+                contador += 1
+
+        return contador
+    
+
+
+    def __reversed__(self):
+        return self[::-1]
+
+
+    def reverter(self):
+        revertido = reversed(self)
+        self.limpar()
+        self.estender(revertido)
+
+
+    def copiar(self):
+        return self[:]
+
+
+
+
 lista = Lista(['Mateus', 'Felipe', 'Lucas', 'Joao', 'Maria', 'felicia', 'Maria'])
-
+copiada = lista.copiar()
 print(lista)
-lista.limpar()
-print(lista)
-
+print(copiada)
+print(id(lista))
+print(id(copiada))
 
 

@@ -1,5 +1,5 @@
-# aula sobre Linked lists
-from typing import Any, SupportsIndex
+# aula sobre Linked lists criei uma linked list com base na lista do python 
+
 
 
 class Lista:
@@ -242,6 +242,11 @@ class Lista:
 
     def copiar(self):
         return self[:]
+    
+
+
+   
+
 
 
 
@@ -252,5 +257,6 @@ print(lista)
 print(copiada)
 print(id(lista))
 print(id(copiada))
+
 
 

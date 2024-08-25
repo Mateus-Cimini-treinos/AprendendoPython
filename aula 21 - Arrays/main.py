@@ -16,3 +16,4 @@ print(arraydeNumeros)
 # Iterar sobre o array
 for e in arraydeNumeros :
     print(e)
+
